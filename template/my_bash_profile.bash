@@ -99,14 +99,4 @@ fi
 
 ## Cleanup
 
-## NWINKLER
-export SVN_EDITOR=vi
-
-#export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0
-export JAVA_HOME=/usr/java/jdk1.6.0_20/
-export JAVA_BIN=$JAVA_HOME/bin
-
-export GIT_SSH=/usr/bin/ssh
-
-
 #unset OS
