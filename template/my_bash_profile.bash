@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Settings
-MY_USER_NAME='swaroop'
+MY_USER_NAME='nils.winkler'
 
 ## Shell and OS check
 
