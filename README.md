@@ -41,6 +41,13 @@ For custom scripts, and aliases, just create the following files (they'll be ign
 
 Anything in the custom directory will be ignored, with the exception of `custom/example.bash`.
 
+## Customize your own settings
+
+The following files need to be changed to match your username and settings:
+
+* `~/.bash_profile`: Set your username
+* `configs/gitconfig`: Set your username, email, github username
+
 ## Themes
 
 There are a few bash it themes.  If you've created your own custom prompts, I'd love it if you shared with everyone else!  Just submit a Pull Request to me (revans).
