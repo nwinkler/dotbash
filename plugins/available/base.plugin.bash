@@ -39,6 +39,19 @@ function check_port {
   sudo lsof -i -n -P | fgrep $port_number
 }
 
+pass() {
+  which gshuf &> /dev/null
+  if [ $? -eq 1 ]
+  then
+    echo "Error: shuf isn't installed!"
+    return 1
+  fi
+
+  pass=$(shuf -n4 /usr/share/dict/words | tr '\n' ' ')
+  echo "With spaces (easier to memorize): $pass"
+  echo "Without (use this as the pass): $(echo $pass | tr -d ' ')"
+}
+
 # Function for previewing markdown files in the browser
 
 function pmdown() {
