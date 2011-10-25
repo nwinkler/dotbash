@@ -12,7 +12,7 @@ Includes autocompletion, themes, aliases, custom functions, a few stolen pieces 
 
 ## Install
 
-1. Check a clone of this repo: `git clone http://github.com/swaroopch/dotbash.git ~/code/dotbash`
+1. Check a clone of this repo: `git clone http://github.com/nwinkler/dotbash.git ~/code/dotbash`
 2. Run `~/code/dotbash/install.sh` (it automatically backs up your `~/.bash_profile`)
 3. Edit your `~/.bash_profile` file in order to customize bash-it -> Do change `MY_USER_NAME` setting to your login user name.
 
