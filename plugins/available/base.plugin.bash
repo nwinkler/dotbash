@@ -39,6 +39,19 @@ function check_port {
   sudo lsof -i -n -P | fgrep $port_number
 }
 
+function check_port_process {
+  port_number=$1
+  shift
+
+  if [[ "$port_number" == "" ]]
+  then
+    echo "Usage: check_port_process <port number>"
+    return 1
+  fi
+
+  ps -ef | grep `sudo lsof -t -i TCP:$port_number` | grep -v "grep" | grep -v "grep"
+}
+
 pass() {
   which gshuf &> /dev/null
   if [ $? -eq 1 ]
