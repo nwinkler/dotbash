@@ -54,6 +54,9 @@ fi
 alias	md='mkdir -p'
 alias	rd=rmdir
 
+# Alias helper
+alias  ag='alias | grep'
+
 function aliases-help() {
 echo "Generic Alias Usage"
 echo
