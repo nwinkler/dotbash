@@ -1,7 +1,7 @@
 alias ycu="yum check-update"
-alias yu="yum --skip-broken --changelog -y update"
-alias yi="yum install"
-alias yr="yum remove"
+alias yu="sudo yum --skip-broken --changelog -y update"
+alias yi="sudo yum install"
+alias yr="sudo yum remove"
  
 alias rpmg="rpm -qa|grep"
 alias rpmq="rpm -q --qf '%{name}-%{version}-%{release}.%{arch}\n'"
