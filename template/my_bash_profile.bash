@@ -11,7 +11,7 @@ then
     exit 1
 fi
 
-if [[ "$OSTYPE" == "darwin10.0" ]]
+if [[ "$OSTYPE" == "darwin10.0" || "$OSTYPE" == "darwin11" ]]
 then
     export OS="mac"
     export GVIM="open -a MacVim"
@@ -43,28 +43,37 @@ else
 fi
 
 ## Python
-if [[ "$USER" == "$MY_USER_NAME" ]] # NOTE https://bitbucket.org/dhellmann/virtualenvwrapper/issue/62/hooklog-permissions#comment-231449
-then
-    export VIRTUALENV_USE_DISTRIBUTE=1
-    export WORKON_HOME="$HOME/local/virtualenvs"
-    export PIP_VIRTUALENV_BASE=$WORKON_HOME
-    mkdir -p $WORKON_HOME
-    [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
-    if [[ $(type workon 2>&1 | head -1) =~ "is a function" ]]
-    then
-        if [[ ! -d "$WORKON_HOME/default" ]]
-        then
-            mkvirtualenv default
-        fi
-        workon default
-    fi
-fi
+#if [[ "$USER" == "$MY_USER_NAME" ]] # NOTE https://bitbucket.org/dhellmann/virtualenvwrapper/issue/62/hooklog-permissions#comment-231449
+#then
+    #export VIRTUALENV_USE_DISTRIBUTE=1
+    #export WORKON_HOME="$HOME/local/virtualenvs"
+    #export PIP_VIRTUALENV_BASE=$WORKON_HOME
+    #mkdir -p $WORKON_HOME
+    #[[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
+    #if [[ $(type workon 2>&1 | head -1) =~ "is a function" ]]
+    #then
+        #if [[ ! -d "$WORKON_HOME/default" ]]
+        #then
+            #mkvirtualenv default
+        #fi
+        #workon default
+    #fi
+#fi
 
 ## Ruby
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
-## Haskell
-[[ -s $HOME/.cabal/bin ]] && export PATH=$HOME/.cabal/bin:$PATH
+### Use RBENV if present
+if [[ -s $HOME/.rbenv ]]
+then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+else
+    if [[ -d "/var/lib/gems/1.8/bin" ]]
+    then
+        export PATH="/var/lib/gems/1.8/bin:$PATH"
+    fi
+fi
+### Else use RVM
+#[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 ## Bash
 
@@ -77,7 +86,7 @@ export BASH_THEME='my'
 
 ## System
 
-export PATH="$HOME/bin:$PATH"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 
 # Don't check mail when opening terminal.
 unset MAILCHECK
@@ -96,6 +105,12 @@ then
     # brew doctor
     # http://mxcl.github.com/homebrew/
     export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+    # Ruby bin (because `brew install ruby` installs latest 1.9.3-p0 (as of this writing) and Mac OS X Lion has Ruby 1.8.7)
+    if [[ "$(brew list | grep '^ruby$')" != "" ]]
+    then
+        export PATH="$(brew --prefix ruby)/bin:$PATH"
+    fi
 fi
 
 ## Cleanup
