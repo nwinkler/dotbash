@@ -1,8 +1,5 @@
 #!/bin/bash
 
-## Settings
-MY_USER_NAME='nils.winkler'
-
 ## Shell and OS check
 
 if [ "$BASH_VERSION" = "" ]
@@ -11,7 +8,7 @@ then
     exit 1
 fi
 
-if [[ "$OSTYPE" == "darwin10.0" || "$OSTYPE" == "darwin11" ]]
+if [[ "$OSTYPE" =~ "darwin" ]]
 then
     export OS="mac"
     export GVIM="open -a MacVim"
@@ -31,34 +28,20 @@ if [[ "$OS" == "mac" ]]
 then
     # brew uninstall macvim
     # brew install --head macvim
-    # rm -rf /Applications/MacVim.app
-    # cp -r /usr/local/Cellar/macvim/*/MacVim.app /Applications
+    # mkdir -p $HOME/Applications
+    # brew linkapps
     ## 1. Using MacVim makes copy/paste work from within Terminal
     ## 2. Using compiled MacVim enables ruby, python Vim-scripting
-    #export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
-    export EDITOR='vim'
-    #alias vim=$EDITOR
+    export EDITOR='$HOME/Applications/MacVim.app/Contents/MacOS/Vim'
+    alias vim=$EDITOR
 else
     export EDITOR='vim'
 fi
 
 ## Python
-#if [[ "$USER" == "$MY_USER_NAME" ]] # NOTE https://bitbucket.org/dhellmann/virtualenvwrapper/issue/62/hooklog-permissions#comment-231449
-#then
-    #export VIRTUALENV_USE_DISTRIBUTE=1
-    #export WORKON_HOME="$HOME/local/virtualenvs"
-    #export PIP_VIRTUALENV_BASE=$WORKON_HOME
-    #mkdir -p $WORKON_HOME
-    #[[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
-    #if [[ $(type workon 2>&1 | head -1) =~ "is a function" ]]
-    #then
-        #if [[ ! -d "$WORKON_HOME/default" ]]
-        #then
-            #mkvirtualenv default
-        #fi
-        #workon default
-    #fi
-#fi
+export VIRTUALENV_USE_DISTRIBUTE=1
+## http://jacobian.org/writing/when-pypi-goes-down/
+export PIP_USE_MIRRORS=1
 
 ## Ruby
 ### Use RBENV if present

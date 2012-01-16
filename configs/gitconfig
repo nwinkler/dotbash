@@ -2,10 +2,10 @@
     whitespace = nowarn
     pager = less
 [user]
-    name = Nils Winkler
-    email = nils@nilswinkler.com
+    name =
+    email =
 [github]
-    user = nwinkler
+    user =
 [color]
     diff = auto
     status = auto
