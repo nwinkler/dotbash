@@ -32,8 +32,9 @@ then
     # brew linkapps
     ## 1. Using MacVim makes copy/paste work from within Terminal
     ## 2. Using compiled MacVim enables ruby, python Vim-scripting
-    export EDITOR='$HOME/Applications/MacVim.app/Contents/MacOS/Vim'
-    alias vim=$EDITOR
+    #export EDITOR='$HOME/Applications/MacVim.app/Contents/MacOS/Vim'
+    export EDITOR='vim'
+    #alias vim=$EDITOR
 else
     export EDITOR='vim'
 fi
