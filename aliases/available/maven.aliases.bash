@@ -5,6 +5,7 @@ alias mrperf="mvn release:perform"
 alias mrrb="mvn release:rollback"
 alias mdep="mvn dependency:tree"
 alias mpom="mvn help:effective-pom"
+alias misk="mi -Dmaven.test.skip=true"
 alias mcisk="mci -Dmaven.test.skip=true"
 
 function maven-help() {
@@ -17,6 +18,7 @@ function maven-help() {
   echo "  mrrb   = mvn release:rollback"
   echo "  mdep   = mvn dependency:tree"
   echo "  mpom   = mvn help:effective-pom"
+  echo "  misk   = mvn install -Dmaven.test.skip=true"  
   echo "  mcisk  = mvn clean install -Dmaven.test.skip=true"  
   echo
 }
