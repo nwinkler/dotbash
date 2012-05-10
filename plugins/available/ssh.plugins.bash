@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function ssh_setup() {
     eval $(ssh-agent) && ssh-add

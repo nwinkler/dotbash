@@ -1,4 +1,3 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#alias v='vim -c "NERDTree" -c "wincmd l"'
-alias v='vim'
+alias v='mvim --remote-tab'
