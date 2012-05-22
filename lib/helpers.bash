@@ -33,7 +33,7 @@ bash-it-aliases ()
 {
     about 'summarizes available bash_it aliases'
     group 'lib'
-    
+
     _bash-it-describe "aliases" "an" "alias" "Alias"
 }
 
@@ -41,7 +41,7 @@ bash-it-completions ()
 {
     about 'summarizes available bash_it completions'
     group 'lib'
-    
+
     _bash-it-describe "completion" "a" "completion" "Completion"
 }
 
@@ -49,7 +49,7 @@ bash-it-plugins ()
 {
     about 'summarizes available bash_it plugins'
     group 'lib'
-    
+
     _bash-it-describe "plugins" "a" "plugin" "Plugin"
 }
 
@@ -57,7 +57,7 @@ _bash-it-describe ()
 {
     about 'summarizes available bash_it plugins'
     group 'lib'
-    
+
     file_type="$1"
     preposition="$2"
     command_suffix="$3"
@@ -87,7 +87,7 @@ disable-plugin ()
     param '1: plugin name'
     example '$ disable-plugin rvm'
     group 'lib'
-    
+
     _disable-thing "plugins" "plugin" $1
 }
 
@@ -97,7 +97,7 @@ disable-alias ()
     param '1: alias name'
     example '$ disable-alias git'
     group 'lib'
-    
+
     _disable-thing "aliases" "alias" $1
 }
 
@@ -107,7 +107,7 @@ disable-completion ()
     param '1: completion name'
     example '$ disable-completion git'
     group 'lib'
-    
+
     _disable-thing "completion" "completion" $1
 }
 
@@ -116,7 +116,7 @@ _disable-thing ()
 	file_type="$1"
 	command_suffix="$2"
 	file_entity="$3"
-	
+
     if [ -z "$file_entity" ]; then
         reference "disable-$command_suffix"
         return
@@ -149,7 +149,7 @@ enable-plugin ()
     param '1: plugin name'
     example '$ enable-plugin rvm'
     group 'lib'
-      
+
     _enable-thing "plugins" "plugin" $1
 }
 
@@ -159,7 +159,7 @@ enable-alias ()
     param '1: alias name'
     example '$ enable-alias git'
     group 'lib'
-      
+
     _enable-thing "aliases" "alias" $1
 }
 
@@ -169,7 +169,7 @@ enable-completion ()
     param '1: completion name'
     example '$ enable-completion git'
     group 'lib'
-      
+
     _enable-thing "completion" "completion" $1
 }
 
@@ -178,7 +178,7 @@ _enable-thing ()
 	file_type="$1"
 	command_suffix="$2"
 	file_entity="$3"
-	
+
     if [ -z "$file_entity" ]; then
         reference "enable-$command_suffix"
         return
@@ -210,6 +210,27 @@ _enable-thing ()
     fi
 
     printf '%s\n' "$file_entity enabled."
+}
+
+alias-help ()
+{
+    about 'shows help for all aliases, or a specific alias group'
+    param '1: optional alias group'
+    example '$ alias-help'
+    example '$ alias-help git'
+
+    if [ -n "$1" ]; then
+        cat $BASH_IT/aliases/enabled/$1.aliases.bash | metafor alias | sed "s/$/'/"
+    else
+        typeset f
+        for f in $BASH_IT/aliases/enabled/*
+        do
+            typeset file=$(basename $f)
+            printf '\n\n%s:\n' "${file%%.*}"
+            # metafor() strips trailing quotes, restore them with sed..
+            cat $f | metafor alias | sed "s/$/'/"
+        done
+    fi
 }
 
 plugins-help ()
