@@ -25,7 +25,7 @@ fi
 source "${BASH_IT}/lib/composure.sh"
 
 # support 'plumbing' metadata
-cite _about _param _example _author _version
+cite _about _param _example _group _author _version
 
 # Load colors first so they can be use in base theme
 source "${BASH_IT}/themes/colors.theme.bash"
