@@ -59,16 +59,39 @@ _git-global-show-proxy ()
 
 _git-global-disable-proxy ()
 {
-	git config --global --unset http.proxy
-	git config --global --unset https.proxy
+	git config --global --unset-all http.proxy
+	git config --global --unset-all https.proxy
 }
 
 _git-global-enable-proxy ()
 {
+	_git-global-disable-proxy
+	
 	git config --global --add http.proxy $BASHIT_HTTP_PROXY
 	git config --global --add https.proxy $BASHIT_HTTPS_PROXY
 }
 
+git-show-proxy ()
+{
+	echo "Git Project Proxy Settings"
+	echo "====================="
+	echo "Git HTTP  proxy: " `git config --get http.proxy`
+	echo "Git HTTPS proxy: " `git config --get https.proxy`
+}
+
+git-disable-proxy ()
+{
+	git config --unset-all http.proxy
+	git config --unset-all https.proxy
+}
+
+git-enable-proxy ()
+{
+	git-disable-proxy
+	
+	git config --add http.proxy $BASHIT_HTTP_PROXY
+	git config --add https.proxy $BASHIT_HTTPS_PROXY
+}
+
 # Planned additional functionality:
 # .ssh/config
-# Git proxy per project
