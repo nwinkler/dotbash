@@ -116,19 +116,35 @@ git-enable-proxy ()
 _ssh-show-proxy ()
 {
 	echo ""
-	echo "SSH Config"
-	echo "=========="
+	echo "SSH Config Enabled"
+	echo "=================="
 	awk '
 	    $1 == "Host" { 
-	        host = $1 ": " $2; 
+	        host = $2; 
 	        next; 
 	    } 
 	    $1 == "ProxyCommand" { 
 	        $1 = ""; 
 	        sub( /^[[:space:]]*/, "" ); 
-	        printf "%s - Proxy: %s\n", host, $0 
+	        printf "%s\t%s\n", host, $0 
 	    }
-	' ~/.ssh/config
+	' ~/.ssh/config | column -t
+
+	echo ""
+	echo "SSH Config Disabled"
+	echo "==================="
+	awk '
+	    $1 == "Host" { 
+	        host = $2; 
+	        next; 
+	    } 
+	    $0 ~ "^#.*ProxyCommand.*" { 
+	        $1 = "";
+	        $2 = ""; 
+	        sub( /^[[:space:]]*/, "" ); 
+	        printf "%s\t%s\n", host, $0 
+	    }
+	' ~/.ssh/config | column -t
 }
 
 # Planned additional functionality:
