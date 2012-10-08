@@ -125,7 +125,6 @@ _ssh-show-proxy ()
 	    } 
 	    $1 == "ProxyCommand" { 
 	        $1 = ""; 
-	        sub( /^[[:space:]]*/, "" ); 
 	        printf "%s\t%s\n", host, $0 
 	    }
 	' ~/.ssh/config | column -t
@@ -141,7 +140,6 @@ _ssh-show-proxy ()
 	    $0 ~ "^#.*ProxyCommand.*" { 
 	        $1 = "";
 	        $2 = ""; 
-	        sub( /^[[:space:]]*/, "" ); 
 	        printf "%s\t%s\n", host, $0 
 	    }
 	' ~/.ssh/config | column -t
