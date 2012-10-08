@@ -118,7 +118,17 @@ _ssh-show-proxy ()
 	echo ""
 	echo "SSH Config"
 	echo "=========="
-	grep "ProxyCommand" ~/.ssh/config
+	awk '
+	    $1 == "Host" { 
+	        host = $1 ": " $2; 
+	        next; 
+	    } 
+	    $1 == "ProxyCommand" { 
+	        $1 = ""; 
+	        sub( /^[[:space:]]*/, "" ); 
+	        printf "%s - Proxy: %s\n", host, $0 
+	    }
+	' ~/.ssh/config
 }
 
 # Planned additional functionality:
