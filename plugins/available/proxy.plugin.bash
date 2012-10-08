@@ -7,6 +7,7 @@ disable-proxy ()
 	unset https_proxy
 	
 	_npm-disable-proxy
+	_ssh-disable-proxy
 }
 
 enable-proxy ()
@@ -15,7 +16,7 @@ enable-proxy ()
 	export https_proxy=$BASHIT_HTTPS_PROXY
 	
 	_npm-enable-proxy
-	_git-global-enable-proxy
+	_ssh-enable-proxy
 }
 
 show-proxy ()
@@ -147,5 +148,20 @@ _ssh-show-proxy ()
 	fi
 }
 
+_ssh-disable-proxy ()
+{
+	if [ -f ~/.ssh/config ] ; then
+		sed -e's/^.*ProxyCommand/#	ProxyCommand/' -i ""  ~/.ssh/config
+	fi
+}
+
+
+_ssh-enable-proxy ()
+{
+	if [ -f ~/.ssh/config ] ; then
+		sed -e's/#	ProxyCommand/	ProxyCommand/' -i ""  ~/.ssh/config
+	fi
+}
+
 # Planned additional functionality:
-# .ssh/config
+# Documentation
