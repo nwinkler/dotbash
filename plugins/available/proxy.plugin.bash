@@ -1,7 +1,7 @@
 cite about-plugin
 about-plugin 'Proxy Tools'
 
-disable-proxy ()
+disable_proxy ()
 {
 	about 'Disables proxy settings for Bash, npm and SSH'
 	group 'proxy'
@@ -10,11 +10,11 @@ disable-proxy ()
 	unset https_proxy
 	echo "Disabled proxy environment variables"
 	
-	npm-disable-proxy
-	ssh-disable-proxy
+	npm_disable_proxy
+	ssh_disable_proxy
 }
 
-enable-proxy ()
+enable_proxy ()
 {
 	about 'Enables proxy settings for Bash, npm and SSH'
 	group 'proxy'
@@ -23,11 +23,11 @@ enable-proxy ()
 	export https_proxy=$BASH_IT_HTTPS_PROXY
 	echo "Enabled proxy environment variables"
 	
-	npm-enable-proxy
-	ssh-enable-proxy
+	npm_enable_proxy
+	ssh_enable_proxy
 }
 
-show-proxy ()
+show_proxy ()
 {
 	about 'Shows the proxy settings for Bash, Git, npm and SSH'
 	group 'proxy'
@@ -37,27 +37,27 @@ show-proxy ()
 	echo "====================="
 	env | grep "proxy"
 	
-	bash-it-show-proxy
-	npm-show-proxy
-	git-global-show-proxy
-	ssh-show-proxy
+	bash_it_show_proxy
+	npm_show_proxy
+	git_global_show_proxy
+	ssh_show_proxy
 }
 
-proxy-help ()
+proxy_help ()
 {
 	about 'Provides an overview of the bash-it proxy configuration'
 	group 'proxy'
 	
 	echo ""
 	echo "bash-it uses the variables BASH_IT_HTTP_PROXY and BASH_IT_HTTPS_PROXY to set the shell's"
-	echo "proxy settings when you call 'enable-proxy'. These variables are best defined in a custom"
+	echo "proxy settings when you call 'enable_proxy'. These variables are best defined in a custom"
 	echo "script in bash-it's custom script folder ($BASH_IT/custom),"
 	echo "e.g. $BASH_IT/custom/proxy.env.bash"
 	
-	bash-it-show-proxy
+	bash_it_show_proxy
 }
 
-bash-it-show-proxy ()
+bash_it_show_proxy ()
 {
 	about 'Shows the bash-it proxy settings'
 	group 'proxy'
@@ -65,12 +65,12 @@ bash-it-show-proxy ()
 	echo ""
 	echo "bash-it Environment Variables"
 	echo "============================="
-	echo "(These variables will be used to set the proxy when you call 'enable-proxy')"
+	echo "(These variables will be used to set the proxy when you call 'enable_proxy')"
 	echo ""
 	env | grep -e "BASH_IT.*PROXY"	
 }
 
-npm-show-proxy ()
+npm_show_proxy ()
 {
 	about 'Shows the npm proxy settings'
 	group 'proxy'
@@ -84,7 +84,7 @@ npm-show-proxy ()
 	fi
 }
 
-npm-disable-proxy ()
+npm_disable_proxy ()
 {
 	about 'Disables npm proxy settings'
 	group 'proxy'
@@ -96,7 +96,7 @@ npm-disable-proxy ()
 	fi
 }
 
-npm-enable-proxy ()
+npm_enable_proxy ()
 {
 	about 'Enables npm proxy settings'
 	group 'proxy'
@@ -108,7 +108,7 @@ npm-enable-proxy ()
 	fi
 }
 
-git-global-show-proxy ()
+git_global_show_proxy ()
 {
 	about 'Shows global Git proxy settings'
 	group 'proxy'
@@ -122,7 +122,7 @@ git-global-show-proxy ()
 	fi
 }
 
-git-global-disable-proxy ()
+git_global_disable_proxy ()
 {
 	about 'Disables global Git proxy settings'
 	group 'proxy'
@@ -134,13 +134,13 @@ git-global-disable-proxy ()
 	fi
 }
 
-git-global-enable-proxy ()
+git_global_enable_proxy ()
 {
 	about 'Enables global Git proxy settings'
 	group 'proxy'
 	
 	if $(command -v git &> /dev/null) ; then
-		git-global-disable-proxy
+		git_global_disable_proxy
 		
 		git config --global --add http.proxy $BASH_IT_HTTP_PROXY
 		git config --global --add https.proxy $BASH_IT_HTTPS_PROXY
@@ -148,7 +148,7 @@ git-global-enable-proxy ()
 	fi
 }
 
-git-show-proxy ()
+git_show_proxy ()
 {
 	about 'Shows current Git project proxy settings'
 	group 'proxy'
@@ -161,7 +161,7 @@ git-show-proxy ()
 	fi
 }
 
-git-disable-proxy ()
+git_disable_proxy ()
 {
 	about 'Disables current Git project proxy settings'
 	group 'proxy'
@@ -173,13 +173,13 @@ git-disable-proxy ()
 	fi
 }
 
-git-enable-proxy ()
+git_enable_proxy ()
 {
 	about 'Enables current Git project proxy settings'
 	group 'proxy'
 	
 	if $(command -v git &> /dev/null) ; then
-		git-disable-proxy
+		git_disable_proxy
 		
 		git config --add http.proxy $BASH_IT_HTTP_PROXY
 		git config --add https.proxy $BASH_IT_HTTPS_PROXY
@@ -187,7 +187,7 @@ git-enable-proxy ()
 	fi
 }
 
-ssh-show-proxy ()
+ssh_show_proxy ()
 {
 	about 'Shows SSH config proxy settings (from ~/.ssh/config)'
 	group 'proxy'
@@ -224,7 +224,7 @@ ssh-show-proxy ()
 	fi
 }
 
-ssh-disable-proxy ()
+ssh_disable_proxy ()
 {
 	about 'Disables SSH config proxy settings'
 	group 'proxy'
@@ -236,7 +236,7 @@ ssh-disable-proxy ()
 }
 
 
-ssh-enable-proxy ()
+ssh_enable_proxy ()
 {
 	about 'Enables SSH config proxy settings'
 	group 'proxy'
