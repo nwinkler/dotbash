@@ -21,13 +21,23 @@ enable-proxy ()
 
 show-proxy ()
 {
+	echo ""
 	echo "Environment Variables"
 	echo "====================="
 	env | grep "proxy"
 	
+	_bash-it-show-proxy
 	_npm-show-proxy
 	_git-global-show-proxy
 	_ssh-show-proxy
+}
+
+_bash-it-show-proxy ()
+{
+	echo ""
+	echo "bash-it Environment Variables"
+	echo "====================="
+	env | grep -e "BASHIT.*PROXY"	
 }
 
 _npm-show-proxy ()
