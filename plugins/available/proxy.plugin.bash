@@ -12,8 +12,8 @@ disable-proxy ()
 
 enable-proxy ()
 {
-	export http_proxy=$BASHIT_HTTP_PROXY
-	export https_proxy=$BASHIT_HTTPS_PROXY
+	export http_proxy=$BASH_IT_HTTP_PROXY
+	export https_proxy=$BASH_IT_HTTPS_PROXY
 	
 	_npm-enable-proxy
 	_ssh-enable-proxy
@@ -32,12 +32,25 @@ show-proxy ()
 	_ssh-show-proxy
 }
 
+proxy-help ()
+{
+	echo ""
+	echo "bash-it uses the variables BASH_IT_HTTP_PROXY and BASH_IT_HTTPS_PROXY to set the shell's"
+	echo "proxy settings when you call 'enable-proxy'. These variables are best defined in a custom"
+	echo "script in bash-it's custom script folder ($BASH_IT/custom),"
+	echo "e.g. $BASH_IT/custom/proxy.env.bash"
+	
+	_bash-it-show-proxy
+}
+
 _bash-it-show-proxy ()
 {
 	echo ""
 	echo "bash-it Environment Variables"
-	echo "====================="
-	env | grep -e "BASHIT.*PROXY"	
+	echo "============================="
+	echo "(These variables will be used to set the proxy when you call 'enable-proxy')"
+	echo ""
+	env | grep -e "BASH_IT.*PROXY"	
 }
 
 _npm-show-proxy ()
@@ -62,8 +75,8 @@ _npm-disable-proxy ()
 _npm-enable-proxy ()
 {
 	if $(command -v npm &> /dev/null) ; then
-		npm config set proxy $BASHIT_HTTP_PROXY
-		npm config set https-proxy $BASHIT_HTTPS_PROXY
+		npm config set proxy $BASH_IT_HTTP_PROXY
+		npm config set https-proxy $BASH_IT_HTTPS_PROXY
 	fi
 }
 
@@ -91,8 +104,8 @@ _git-global-enable-proxy ()
 	if $(command -v git &> /dev/null) ; then
 		_git-global-disable-proxy
 		
-		git config --global --add http.proxy $BASHIT_HTTP_PROXY
-		git config --global --add https.proxy $BASHIT_HTTPS_PROXY
+		git config --global --add http.proxy $BASH_IT_HTTP_PROXY
+		git config --global --add https.proxy $BASH_IT_HTTPS_PROXY
 	fi
 }
 
@@ -119,8 +132,8 @@ git-enable-proxy ()
 	if $(command -v git &> /dev/null) ; then
 		git-disable-proxy
 		
-		git config --add http.proxy $BASHIT_HTTP_PROXY
-		git config --add https.proxy $BASHIT_HTTPS_PROXY
+		git config --add http.proxy $BASH_IT_HTTP_PROXY
+		git config --add https.proxy $BASH_IT_HTTPS_PROXY
 	fi
 }
 
