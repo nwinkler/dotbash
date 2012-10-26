@@ -10,5 +10,5 @@ alias mdep="mvn dependency:tree"
 alias mpom="mvn help:effective-pom"
 alias misk="mi -Dmaven.test.skip=true"
 alias mcisk="mci -Dmaven.test.skip=true"
-alias mjr="maven jetty:run"
+alias mjr="mvn jetty:run"
 
