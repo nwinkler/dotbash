@@ -8,6 +8,7 @@ alias la='ls -AF'       # Compact view, show hidden
 alias ll='ls -lhrt'
 alias l='ls -a'
 alias l1='ls -1'
+alias lll='ls -als'
 
 alias _="sudo"
 
