@@ -18,7 +18,7 @@ _bash-it-comp-list-available-not-enabled()
 			fi
 		done)
 
-	COMPREPLY=( $(compgen -W "${available_things}" -- ${cur}) )	
+	COMPREPLY=( $(compgen -W "all ${available_things}" -- ${cur}) )	
 }
 
 _bash-it-comp-list-enabled()
@@ -30,7 +30,7 @@ _bash-it-comp-list-enabled()
 			basename $f | cut -d'.' -f1
 		done)
 
-	COMPREPLY=( $(compgen -W "${enabled_things}" -- ${cur}) )	
+	COMPREPLY=( $(compgen -W "all ${enabled_things}" -- ${cur}) )	
 }
 
 _bash-it-comp-list-available()
