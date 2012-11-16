@@ -30,26 +30,18 @@ alias gdel='git branch -d'
 alias gmu='git fetch origin -v; git fetch upstream -v; git merge upstream/master'
 alias gll='git log --graph --pretty=oneline --abbrev-commit'
 
-## https://gist.github.com/590895
-## via http://notes.envato.com/developers/rebasing-merge-commits-in-git/
-function git_current_branch() {
-  git symbolic-ref HEAD 2> /dev/null | sed -e 's/refs\/heads\///'
-}
-
-alias grb='git rebase -p'
-alias gup='git fetch origin && grb origin/$(git_current_branch)'
-alias gpthis='git push origin HEAD:$(git_current_branch)'
-alias gm='git merge --no-ff'
-alias gsync='git fetch origin && git rebase -p origin/$(git_current_branch) && git push origin HEAD:$(git_current_branch)'
-
-case $OSTYPE in
-  linux*)
-    alias gd='git diff | vim -R -'
-    ;;
-  darwin*)
-    alias gd='git diff | vim -R -'
-    ;;
-  darwin*)
-    alias gd='git diff'
-    ;;
-esac
+if [ -z "$EDITOR" ]; then
+    case $OSTYPE in
+      linux*)
+        alias gd='git diff | vim -R -'
+        ;;
+      darwin*)
+        alias gd='git diff | mate'
+        ;;
+      *)
+        alias gd='git diff'
+        ;;
+    esac
+else
+    alias gd="git diff | $EDITOR"
+fi
