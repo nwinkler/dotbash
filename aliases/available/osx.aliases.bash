@@ -23,3 +23,5 @@ fi
 
 # Requires growlnotify, which can be found in the Growl DMG under "Extras"
 alias grnot='growlnotify -s -t Terminal -m "Done"'
+
+alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title "Terminal" -message "Done"'
