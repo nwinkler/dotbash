@@ -10,7 +10,7 @@ function mp3_to_wav() {
 	
 	echo "Decoding to ${file_name}" 
 	
-	lame -decode ${orig_name} ./${file_name}
+	lame --decode "${orig_name}" ./"${file_name}"
 }
 
 function aac_to_wav() {
@@ -22,5 +22,5 @@ function aac_to_wav() {
 	
 	echo "Decoding to ${file_name}" 
 	
-	faad -o ${file_name}.wav ./${orig_name} 
+	faad -o ./"${file_name}" "${orig_name}" 
 }
